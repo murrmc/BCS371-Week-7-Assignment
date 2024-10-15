@@ -5,12 +5,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Surface
@@ -35,46 +39,51 @@ import kotlin.math.ceil
 
 // ToDo 9: make this composable navigatable and then add a button to navigate to the GPA calculator
 @Composable
-fun PizzaPartyScreen( modifier: Modifier = Modifier) {
+fun PizzaPartyScreen(navController: NavController) {
     var totalPizzas by remember { mutableIntStateOf(0) }
     var numPeopleInput by remember { mutableStateOf("") }
     var hungerLevel by remember { mutableStateOf("Medium") }
 
-    Column(
-        modifier = modifier.padding(10.dp)
-    ) {
+    Column(modifier = Modifier.padding(10.dp)) {
         Text(
             text = "Pizza Party",
             fontSize = 38.sp,
-            modifier = modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 16.dp)
         )
         NumberField(
             labelText = "Number of people?",
             textInput = numPeopleInput,
             onValueChange = { numPeopleInput = it },
-            modifier = modifier.padding(bottom = 16.dp).fillMaxWidth()
+            modifier = Modifier.padding(bottom = 16.dp).fillMaxWidth()
         )
         RadioGroup(
             labelText = "How hungry?",
             radioOptions = listOf("Light", "Medium", "Very hungry"),
             selectedOption = hungerLevel,
             onSelected = { hungerLevel = it },
-            modifier = modifier
+            modifier = Modifier
         )
         Text(
             text = "Total pizzas: $totalPizzas",
             fontSize = 22.sp,
-            modifier = modifier.padding(top = 16.dp, bottom = 16.dp)
+            modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)
         )
         Button(
             onClick = {            totalPizzas = calculateNumPizzas(numPeopleInput.toInt(),
                 hungerLevel)
 
             },
-            modifier = modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text("Calculate")
         }
+
+        Button( onClick = { navController.navigate("gpaAppFun")},
+            modifier= Modifier.padding(start = 40.dp, end = 40.dp)) {
+            Icon( imageVector = Icons.Default.Info, contentDescription = "Phone")
+            Text("Go To activity 2")
+        }
+        Spacer(Modifier.padding(10.dp))
 
     }
 }

@@ -63,7 +63,13 @@ fun Navigation() {
         }
 
         // ToDo 7: Add more nav screens here for the pizza party and gpa calculator
+        composable("gpaAppFun") {
+            gpaappFun(navController)
+        }
 
+        composable("PizzaPartyFun") {
+            PizzaPartyScreen(navController)
+        }
 
     }
 
@@ -91,6 +97,8 @@ fun FirstScreen(navController: NavController) {
 @Composable
 fun SecondScreen(navController: NavController) {
     var sliderValue by remember { mutableStateOf(0.5f) }
+    var ChackboxValue by remember { mutableStateOf(true) }
+
 
     val context = LocalContext.current
     Column ( modifier = Modifier.padding(horizontal = 20.dp),
@@ -105,7 +113,7 @@ fun SecondScreen(navController: NavController) {
         }
 
         // ToDo 8: when the switch is off, disable the slider
-        Checkbox(checked = true, onCheckedChange = {  }, modifier = Modifier.padding(10.dp))
+        Checkbox(checked = ChackboxValue, onCheckedChange = { ChackboxValue = it }, modifier = Modifier.padding(10.dp))
 
     }
 

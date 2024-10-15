@@ -2,10 +2,13 @@ package edu.farmingdale.bcs371_w7_demo_nav
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 // ToDo 10: make this composable navigable and then add a button to navigate to a suitable screen
@@ -76,6 +79,15 @@ fun gpaappFun(navController: NavController) {
         }) {
             Text(btnLabel)
         }
+
+        Button( onClick = {
+            navController.navigate("second_screen")
+        },
+            modifier= Modifier.padding(start = 40.dp, end = 40.dp)) {
+            Icon( imageVector = Icons.Default.Info, contentDescription = "Phone")
+            Text("Go To activity 2")
+        }
+        Spacer(Modifier.padding(10.dp))
 
 
         if (gpa.isNotEmpty()) {
